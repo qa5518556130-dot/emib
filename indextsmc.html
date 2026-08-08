@@ -1,0 +1,1242 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>台積電，有威脅了？類EMIB技術＋供應鏈整理 · 散戶日記</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;700;900&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #0a0908;
+    --bg-soft: #121110;
+    --card: #16141280;
+    --card-solid: #161412;
+    --line: #2c2822;
+    --gold: #d8b26a;
+    --gold-bright: #f0d089;
+    --gold-dim: #8a7038;
+    --text: #f2ede1;
+    --text-dim: #b8ae9a;
+    --text-faint: #7a7264;
+    --red-poor: #8a5a4a;
+    --serif: 'Noto Serif TC', serif;
+    --sans: 'Noto Sans TC', sans-serif;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    line-height:1.75;
+    overflow-x:hidden;
+  }
+  .wrap{max-width:820px; margin:0 auto; padding:0 24px;}
+  a{color:inherit;}
+
+  /* subtle background texture */
+  body::before{
+    content:"";
+    position:fixed; inset:0;
+    background:
+      radial-gradient(ellipse 800px 500px at 50% -10%, rgba(216,178,106,0.08), transparent 60%),
+      radial-gradient(ellipse 600px 400px at 90% 30%, rgba(216,178,106,0.04), transparent 60%);
+    pointer-events:none;
+    z-index:0;
+  }
+
+  /* ---------- HERO ---------- */
+  .hero-split{
+    position:relative;
+    display:grid;
+    grid-template-columns: 46% 54%;
+    min-height:620px;
+  }
+  .hero-photo-full{
+    position:relative;
+    overflow:hidden;
+    background:#050505;
+  }
+  .hero-photo-full img{
+    width:100%; height:100%;
+    object-fit:cover;
+    object-position: center 15%;
+    display:block;
+  }
+  .hero-fade{
+    position:absolute; inset:0;
+    background: linear-gradient(90deg, transparent 45%, var(--bg) 96%);
+  }
+  .hero-panel{
+    position:relative; z-index:1;
+    background: var(--bg);
+    display:flex; flex-direction:column; justify-content:center;
+    padding: 80px 56px;
+  }
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:10px;
+    font-size:12.5px; letter-spacing:0.16em;
+    color: var(--gold);
+    font-weight:500;
+    margin-bottom:22px;
+  }
+  .eyebrow::before{ content:""; width:22px; height:1px; background:var(--gold-dim); }
+  .eyebrow-sub{
+    font-size:11.5px; letter-spacing:0.2em;
+    color: var(--text-faint);
+    text-transform:uppercase;
+    margin-bottom:22px;
+  }
+  .eyebrow-sub span{ color:var(--gold-dim); }
+
+  h1.title{
+    font-family: var(--serif);
+    font-weight:900;
+    font-size: clamp(34px, 5vw, 52px);
+    line-height:1.3;
+    color: var(--text);
+    margin-bottom:20px;
+    letter-spacing:0.01em;
+  }
+  h1.title .accent{ color: var(--gold-bright); }
+
+  .subtitle{
+    font-size:15.5px;
+    color: var(--text-dim);
+    max-width:480px;
+    margin:0 0 40px;
+    line-height:1.85;
+  }
+
+  .hero-stats{
+    display:flex; gap:44px;
+  }
+  .hero-stats .stat{ text-align:left; }
+  .hero-stats .stat b{
+    display:block;
+    font-family:var(--serif);
+    font-size:24px;
+    color:var(--gold-bright);
+    font-weight:700;
+  }
+  .hero-stats .stat span{
+    display:block;
+    font-size:11.5px;
+    color:var(--text-faint);
+    margin-top:5px;
+    letter-spacing:0.04em;
+  }
+
+  .scroll-cue{
+    margin-top:46px;
+    font-size:12px;
+    color: var(--text-faint);
+    letter-spacing:0.1em;
+  }
+  .scroll-cue .arrow{
+    display:block;
+    margin:10px 0 0;
+    width:1px; height:30px;
+    background: linear-gradient(var(--gold-dim), transparent);
+    animation: dropline 1.8s ease-in-out infinite;
+  }
+  @keyframes dropline{
+    0%,100%{ opacity:.25; }
+    50%{ opacity:1; }
+  }
+
+  @media(max-width:760px){
+    .hero-split{
+      grid-template-columns:1fr;
+      grid-template-rows: 44vh auto;
+      min-height:auto;
+    }
+    .hero-fade{ background: linear-gradient(180deg, transparent 35%, var(--bg) 96%); }
+    .hero-panel{ padding:40px 24px 56px; }
+    .hero-stats{ gap:28px; }
+    .subtitle{ max-width:none; }
+  }
+
+  /* ---------- INTRO ---------- */
+  .intro{
+    padding: 56px 0 20px;
+    position:relative;
+    z-index:1;
+  }
+  .intro-label{
+    font-size:12px; letter-spacing:0.15em; color:var(--gold-dim);
+    text-transform:uppercase; margin-bottom:14px; font-weight:500;
+  }
+  .intro p{
+    font-size:16px;
+    color: var(--text-dim);
+  }
+  .intro strong{ color: var(--text); font-weight:500; }
+
+  /* ---------- SECTION HEADER ---------- */
+  .section-head{
+    text-align:center;
+    padding: 60px 0 36px;
+  }
+  .section-head h2{
+    font-family:var(--serif);
+    font-size:26px;
+    font-weight:700;
+    color:var(--text);
+  }
+  .section-head p{
+    color:var(--text-faint);
+    font-size:14px;
+    margin-top:10px;
+  }
+
+  /* ---------- MINDSET CARDS ---------- */
+  .cards{ position:relative; z-index:1; padding-bottom:20px; }
+  .card{
+    border:1px solid var(--line);
+    background: linear-gradient(180deg, rgba(216,178,106,0.03), transparent 40%), var(--card-solid);
+    border-radius:4px;
+    padding:34px 30px 30px;
+    margin-bottom:22px;
+    position:relative;
+    opacity:0; transform:translateY(18px);
+    transition:opacity .7s ease, transform .7s ease;
+  }
+  .card.in{ opacity:1; transform:translateY(0); }
+  .card-index{
+    position:absolute; top:-1px; right:0px;
+    font-family:var(--serif);
+    font-size:26px;
+    font-weight:600;
+    color: var(--text-dim);
+    background:var(--bg-soft);
+    border:1px solid var(--line);
+    border-top:none; border-right:none;
+    padding:12px 24px;
+    letter-spacing:0.06em;
+  }
+  .card-index b{ color:var(--gold); font-weight:800; font-size:28px; }
+
+  .card-icon{
+    width:60px; height:60px;
+    border-radius:10px;
+    border:1px solid var(--gold-dim);
+    background: radial-gradient(circle at 30% 25%, rgba(216,178,106,0.16), transparent 70%), var(--bg-soft);
+    display:flex; align-items:center; justify-content:center;
+    margin-bottom:18px;
+    color: var(--gold-bright);
+  }
+  .card-icon svg{ width:32px; height:32px; }
+
+  .vs-row{
+    display:grid;
+    grid-template-columns:1fr auto 1fr;
+    gap:14px;
+    align-items:stretch;
+    margin-bottom:20px;
+  }
+  .vs-box{
+    position:relative;
+    overflow:hidden;
+    border-radius:3px;
+    padding:14px 16px;
+    font-size:13.5px;
+    transition: border-color .3s ease, background .3s ease;
+  }
+  .vs-box::after{
+    content:"";
+    position:absolute;
+    top:0; left:-60%;
+    width:35%; height:100%;
+    background: linear-gradient(115deg, transparent, rgba(255,255,255,0.16), transparent);
+    transform: skewX(-20deg);
+    transition: left .65s ease;
+    pointer-events:none;
+  }
+  .vs-box:hover::after{ left:135%; }
+  .vs-box.poor{
+    background: rgba(138,90,74,0.08);
+    border:1px solid rgba(138,90,74,0.35);
+  }
+  .vs-box.poor:hover{
+    border-color: rgba(201,157,140,0.7);
+    background: rgba(138,90,74,0.13);
+  }
+  .vs-box.rich{
+    background: rgba(216,178,106,0.07);
+    border:1px solid rgba(216,178,106,0.35);
+  }
+  .vs-box.rich:hover{
+    border-color: var(--gold);
+    background: rgba(216,178,106,0.12);
+  }
+  .vs-label{
+    display:flex; align-items:center; gap:6px;
+    font-size:11.5px; letter-spacing:0.08em;
+    margin-bottom:6px; font-weight:700;
+  }
+  .vs-box.poor .vs-label{ color:#c99d8c; }
+  .vs-box.rich .vs-label{ color: var(--gold-bright); }
+  .vs-box p{ color:var(--text); font-size:14px; line-height:1.65; font-weight:400; }
+  .vs-divider{
+    display:flex; align-items:center; justify-content:center;
+    color:var(--text-faint); font-size:12px; font-family:var(--serif);
+  }
+
+  .card h3{
+    font-family:var(--serif);
+    font-size:24px;
+    font-weight:700;
+    color:var(--text);
+    margin-bottom:12px;
+  }
+  .card .desc{
+    color:var(--text-dim);
+    font-size:14.5px;
+    margin-bottom:18px;
+  }
+  .quote{
+    border-left:2px solid var(--gold);
+    padding:10px 0 10px 16px;
+    font-family:var(--serif);
+    font-size:16px;
+    color:var(--gold-bright);
+    font-weight:500;
+    line-height:1.6;
+  }
+
+  /* ---------- TEASER (locked bonus) ---------- */
+  .teaser{
+    position:relative; z-index:1;
+    border:1px dashed var(--gold-dim);
+    border-radius:4px;
+    padding:30px 28px;
+    margin-bottom:40px;
+    background: linear-gradient(135deg, rgba(216,178,106,0.05), transparent 60%);
+    text-align:center;
+  }
+  .teaser .lock{
+    width:38px; height:38px;
+    margin:0 auto 14px;
+    border-radius:50%;
+    border:1px solid var(--gold-dim);
+    display:flex; align-items:center; justify-content:center;
+    color:var(--gold);
+  }
+  .teaser .lock svg{ width:17px; height:17px; }
+  .teaser .tag{
+    font-size:11.5px; letter-spacing:0.12em; color:var(--gold-dim);
+    text-transform:uppercase; margin-bottom:10px;
+  }
+  .teaser h4{
+    font-family:var(--serif);
+    font-size:18px;
+    color:var(--text);
+    margin-bottom:10px;
+  }
+  .teaser p{
+    font-size:13.5px;
+    color:var(--text-faint);
+    max-width:460px;
+    margin:0 auto;
+  }
+
+  /* ---------- COLLECTIBLE QUOTE CARD ---------- */
+  .collect-card{
+    position:relative; z-index:1;
+    border:1px solid var(--gold-dim);
+    border-radius:4px;
+    padding:32px 28px 26px;
+    margin-bottom:40px;
+    background: var(--card-solid);
+  }
+  .collect-card .cc-head{
+    display:flex; align-items:center; justify-content:space-between;
+    margin-bottom:22px;
+  }
+  .collect-card .cc-head h3{
+    font-family:var(--serif);
+    font-size:18px;
+    color:var(--text);
+  }
+  .collect-card .cc-head span{
+    font-size:11px;
+    color:var(--text-faint);
+    letter-spacing:0.05em;
+  }
+  .cc-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+  }
+  .cc-item{
+    border-left:2px solid var(--gold-dim);
+    padding:8px 0 8px 12px;
+  }
+  .cc-item .cc-num{
+    font-family:var(--serif);
+    font-size:11px;
+    color:var(--gold-dim);
+    display:block;
+    margin-bottom:3px;
+  }
+  .cc-item p{
+    font-size:13px;
+    color:var(--text-dim);
+    line-height:1.55;
+  }
+  @media(max-width:560px){
+    .cc-grid{ grid-template-columns:1fr; }
+  }
+
+  .card-comic{
+    width:100%;
+    border:1px solid var(--line);
+    border-radius:4px;
+    overflow:hidden;
+    margin-bottom:20px;
+    cursor:zoom-in;
+    position:relative;
+  }
+  .card-comic img{
+    width:100%;
+    display:block;
+  }
+  .card-comic .zoom-hint{
+    position:absolute; right:10px; bottom:10px;
+    font-size:11px;
+    color:#f2ede1;
+    background:rgba(10,9,8,0.65);
+    border:1px solid rgba(216,178,106,0.4);
+    padding:4px 10px;
+    letter-spacing:0.04em;
+  }
+
+  .lightbox{
+    position:fixed; inset:0;
+    background:rgba(6,5,4,0.94);
+    display:none;
+    align-items:center; justify-content:center;
+    z-index:80;
+    padding:30px;
+    cursor:zoom-out;
+  }
+  .lightbox.active{ display:flex; }
+  .lightbox img{
+    max-width:min(92vw, 520px);
+    max-height:90vh;
+    border:1px solid var(--gold-dim);
+    display:block;
+  }
+
+  /* ---------- CHECKLIST ---------- */
+  .checklist-section{
+    position:relative; z-index:1;
+    padding: 20px 0 10px;
+  }
+  .checklist-card{
+    border:1px solid var(--gold-dim);
+    background: var(--card-solid);
+    border-radius:4px;
+    padding:32px 28px;
+  }
+  .checklist-card h3{
+    font-family:var(--serif);
+    font-size:20px;
+    text-align:center;
+    margin-bottom:6px;
+  }
+  .checklist-card .sub{
+    text-align:center;
+    color:var(--text-faint);
+    font-size:13px;
+    margin-bottom:26px;
+  }
+  .check-item{
+    display:flex; align-items:center; gap:14px;
+    padding:13px 4px;
+    border-bottom:1px solid var(--line);
+    cursor:pointer;
+    user-select:none;
+  }
+  .check-item:last-of-type{ border-bottom:none; }
+  .check-box{
+    flex:none;
+    width:20px; height:20px;
+    border:1px solid var(--gold-dim);
+    border-radius:3px;
+    display:flex; align-items:center; justify-content:center;
+    font-size:12px;
+    color: transparent;
+    transition: all .2s ease;
+  }
+  .check-item.checked .check-box{
+    background: var(--gold);
+    border-color:var(--gold);
+    color:#141210;
+  }
+  .check-item span.txt{
+    font-size:14.5px;
+    color:var(--text-dim);
+    transition:color .2s ease;
+  }
+  .check-item.checked span.txt{ color:var(--text); }
+
+  .tally{
+    margin-top:26px;
+    text-align:center;
+    padding-top:22px;
+    border-top:1px dashed var(--line);
+  }
+  .tally b{
+    font-family:var(--serif);
+    font-size:34px;
+    color:var(--gold-bright);
+  }
+  .tally span{
+    display:block;
+    font-size:12.5px;
+    color:var(--text-faint);
+    margin-top:4px;
+  }
+
+  /* ---------- ACTION CARDS ---------- */
+  .actions{ position:relative; z-index:1; padding:20px 0 10px; }
+  .action-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:14px;
+  }
+  .action-item{
+    position:relative;
+    overflow:hidden;
+    border:1px solid var(--line);
+    background:var(--card-solid);
+    border-radius:4px;
+    padding:18px 16px;
+    transition: border-color .3s ease, background .3s ease;
+  }
+  .action-item::after{
+    content:"";
+    position:absolute;
+    top:0; left:-60%;
+    width:35%; height:100%;
+    background: linear-gradient(115deg, transparent, rgba(216,178,106,0.18), transparent);
+    transform: skewX(-20deg);
+    transition: left .65s ease;
+    pointer-events:none;
+  }
+  .action-item:hover{
+    border-color: var(--gold-dim);
+    background: rgba(216,178,106,0.05);
+  }
+  .action-item:hover::after{ left:135%; }
+  .action-item .num{
+    font-family:var(--serif);
+    color:var(--gold-dim);
+    font-size:12px;
+    margin-bottom:8px;
+    letter-spacing:0.05em;
+  }
+  .action-item p{
+    font-size:13.5px;
+    color:var(--text-dim);
+  }
+  @media(max-width:560px){
+    .action-grid{ grid-template-columns:1fr; }
+    .vs-row{ grid-template-columns:1fr; }
+    .vs-divider{ display:none; }
+  }
+
+  /* ---------- LIVE ENTRY ---------- */
+  .live-section{
+    position:relative; z-index:1;
+    margin:80px 0 60px;
+    padding:48px 24px;
+    text-align:center;
+    border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+    background: radial-gradient(ellipse 620px 340px at 50% 55%, rgba(216,178,106,0.11), transparent 70%);
+  }
+  .live-label{
+    font-size:12px; letter-spacing:0.2em;
+    color:var(--gold-dim); text-transform:uppercase;
+    margin-bottom:10px;
+  }
+  .live-section h3{
+    font-family:var(--serif);
+    font-size:22px;
+    margin-bottom:6px;
+  }
+  .live-section .hint{
+    font-size:13px;
+    color:var(--text-faint);
+    margin-bottom:32px;
+  }
+  .live-btn-wrap{
+    position:relative;
+    display:inline-block;
+  }
+  .live-btn-wrap::before{
+    content:"";
+    position:absolute;
+    inset:-34px;
+    background: radial-gradient(circle, rgba(240,208,137,0.5), rgba(240,208,137,0.12) 55%, transparent 75%);
+    filter: blur(16px);
+    z-index:0;
+    animation: haloPulse 2.6s ease-in-out infinite;
+    pointer-events:none;
+  }
+  @keyframes haloPulse{
+    0%,100%{ opacity:.6; transform:scale(0.9); }
+    50%{ opacity:1; transform:scale(1.1); }
+  }
+  .live-btn{
+    position:relative; z-index:1;
+    overflow:hidden;
+    display:inline-flex; align-items:center; gap:10px;
+    background: linear-gradient(135deg, var(--gold-bright), var(--gold));
+    color:#171310;
+    font-weight:700;
+    font-size:15px;
+    padding:15px 34px;
+    border-radius:999px;
+    text-decoration:none;
+    letter-spacing:0.03em;
+    box-shadow: 0 0 26px 6px rgba(240,208,137,0.5), 0 6px 20px rgba(0,0,0,0.4);
+    animation: breathe 2.6s ease-in-out infinite;
+  }
+  .live-btn::after{
+    content:"";
+    position:absolute;
+    top:0; left:-60%;
+    width:35%; height:100%;
+    background: linear-gradient(115deg, transparent, rgba(255,255,255,0.65), transparent);
+    transform: skewX(-20deg);
+    animation: shimmer 3s ease-in-out infinite;
+    pointer-events:none;
+  }
+  @keyframes shimmer{
+    0%{ left:-60%; }
+    45%,100%{ left:135%; }
+  }
+  .live-btn .dot{
+    width:8px; height:8px;
+    border-radius:50%;
+    background:#171310;
+    position:relative; z-index:1;
+  }
+  .live-btn span:not(.dot){ position:relative; z-index:1; }
+  @keyframes breathe{
+    0%,100%{ box-shadow: 0 0 26px 6px rgba(240,208,137,0.5), 0 6px 20px rgba(0,0,0,0.4); transform:scale(1); }
+    50%{ box-shadow: 0 0 40px 10px rgba(240,208,137,0.65), 0 6px 24px rgba(0,0,0,0.45); transform:scale(1.03); }
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    position:relative; z-index:1;
+    padding: 20px 0 50px;
+    text-align:center;
+  }
+  .socials{
+    display:flex; justify-content:center; gap:28px;
+    margin-bottom:28px;
+  }
+  .socials a{
+    display:inline-flex; align-items:center; gap:7px;
+    font-size:13.5px;
+    color:var(--text-dim);
+    text-decoration:none;
+    border-bottom:1px solid var(--gold-dim);
+    padding-bottom:4px;
+  }
+  .socials svg{ width:16px; height:16px; color:var(--gold); flex:none; }
+  .disclaimer{
+    max-width:480px;
+    margin:0 auto 18px;
+    font-size:11.5px;
+    color:var(--text-faint);
+    line-height:1.8;
+  }
+  .brandline{
+    font-size:11.5px;
+    color:var(--text-faint);
+    letter-spacing:0.04em;
+  }
+
+  /* ---------- PAGE-SPECIFIC: NOTICE / DISCLAIMER BANNER ---------- */
+  .notice-card{
+    position:relative; z-index:1;
+    border:1px solid rgba(138,90,74,0.5);
+    background: linear-gradient(135deg, rgba(138,90,74,0.09), transparent 60%), var(--card-solid);
+    border-radius:4px;
+    padding:24px 26px;
+    margin-bottom:44px;
+    display:flex; gap:16px;
+  }
+  .notice-card .notice-icon{
+    flex:none;
+    width:34px; height:34px;
+    border-radius:50%;
+    border:1px solid rgba(201,157,140,0.6);
+    display:flex; align-items:center; justify-content:center;
+    color:#c99d8c;
+    font-family:var(--serif);
+    font-weight:700;
+    font-size:16px;
+  }
+  .notice-card h4{
+    font-family:var(--serif);
+    font-size:15px;
+    color:#e8d9d2;
+    margin-bottom:8px;
+  }
+  .notice-card p{
+    font-size:12.5px;
+    color:var(--text-dim);
+    line-height:1.8;
+  }
+
+  /* ---------- TECH DIAGRAM ---------- */
+  .tech-diagram{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+    margin:28px 0 40px;
+  }
+  .diagram-col{
+    position:relative; overflow:hidden;
+    border:1px solid var(--gold-dim);
+    background: linear-gradient(160deg, rgba(216,178,106,0.06), transparent 55%), var(--card-solid);
+    border-radius:6px;
+    padding:34px 22px 30px;
+    text-align:center;
+    transition: border-color .3s ease, transform .3s ease;
+  }
+  .diagram-col::before{
+    content:"";
+    position:absolute; top:0; left:0; right:0; height:2px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+  .diagram-col::after{
+    content:"";
+    position:absolute; top:0; left:-60%;
+    width:35%; height:100%;
+    background: linear-gradient(115deg, transparent, rgba(216,178,106,0.15), transparent);
+    transform: skewX(-20deg);
+    transition: left .7s ease;
+    pointer-events:none;
+  }
+  .diagram-col:hover{ border-color:var(--gold); transform:translateY(-2px); }
+  .diagram-col:hover::after{ left:135%; }
+  .diagram-col svg{ width:100%; max-width:230px; height:auto; margin-bottom:22px; }
+  .diagram-col p{ font-size:16px; color:var(--text); line-height:1.85; font-weight:400; }
+  .diagram-col p b{ display:inline-block; margin-bottom:6px; color:var(--gold-bright); font-family:var(--serif); font-size:22px; font-weight:700; }
+  @media(max-width:560px){ .tech-diagram{ grid-template-columns:1fr; } }
+
+  /* ---------- SPEC TABLE ---------- */
+  .spec-table{
+    width:100%;
+    border-collapse:collapse;
+    margin:24px 0 44px;
+    font-size:15.5px;
+    border:1px solid var(--gold-dim);
+  }
+  .spec-table th, .spec-table td{
+    border:1px solid var(--line);
+    padding:18px 20px;
+    text-align:left;
+    vertical-align:top;
+  }
+  .spec-table th{
+    background: linear-gradient(160deg, rgba(216,178,106,0.12), var(--bg-soft));
+    color:var(--gold-bright);
+    font-weight:700;
+    font-size:15px;
+    letter-spacing:0.03em;
+  }
+  .spec-table td{ color:var(--text); line-height:1.8; font-weight:400; }
+  .spec-table td:first-child{ color:var(--gold); font-size:14.5px; font-weight:600; width:24%; }
+  .spec-table tr:nth-child(even) td{ background:rgba(216,178,106,0.03); }
+  .spec-table tr:hover td{ background:rgba(216,178,106,0.07); }
+
+  /* ---------- TAGS ---------- */
+  .tag{
+    display:inline-flex; align-items:center; gap:5px;
+    font-size:10.5px; letter-spacing:0.03em;
+    padding:3px 10px;
+    border-radius:999px;
+    font-weight:600;
+    white-space:nowrap;
+  }
+  .tag.confirmed{
+    position:relative;
+    background: rgba(216,178,106,0.9);
+    color:#171310;
+    animation: tagGlow 2.4s ease-in-out infinite;
+  }
+  @keyframes tagGlow{
+    0%,100%{ box-shadow: 0 0 3px 0 rgba(240,208,137,0.35); }
+    50%{ box-shadow: 0 0 11px 3px rgba(240,208,137,0.85); }
+  }
+  .tag.estimate{ background: rgba(216,178,106,0.1); border:1px solid var(--gold-dim); color:var(--gold-bright); }
+  .tag.report{ background: rgba(255,255,255,0.06); border:1px solid var(--line); color:var(--text-dim); }
+  .tag.rumor{
+    background: rgba(138,90,74,0.12);
+    border:1px solid rgba(138,90,74,0.5);
+    color:#c99d8c;
+    padding-left:7px;
+  }
+  .tag.rumor::before{
+    content:"";
+    width:11px; height:11px;
+    flex:none;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 3L2 20h20L12 3z' fill='none' stroke='%23c99d8c' stroke-width='2' stroke-linejoin='round'/%3E%3Cline x1='12' y1='9' x2='12' y2='14' stroke='%23c99d8c' stroke-width='2' stroke-linecap='round'/%3E%3Ccircle cx='12' cy='17.2' r='1.1' fill='%23c99d8c'/%3E%3C/svg%3E");
+    background-size:contain; background-repeat:no-repeat;
+  }
+
+  /* ---------- CAMP / COMPANY CARDS ---------- */
+  .camp-block{ margin-bottom:36px; }
+  .camp-head{
+    display:flex; align-items:center; justify-content:space-between;
+    margin-bottom:14px;
+    flex-wrap:wrap; gap:8px;
+  }
+  .camp-head h4{
+    font-family:var(--serif);
+    font-size:17px;
+    color:var(--text);
+  }
+  .company-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:14px;
+  }
+  .company-card{
+    position:relative; overflow:hidden;
+    border:1px solid var(--line);
+    background:var(--card-solid);
+    border-radius:4px;
+    padding:18px 18px 16px;
+    transition: border-color .3s ease, background .3s ease;
+  }
+  .company-card::after{
+    content:"";
+    position:absolute; top:0; left:-60%;
+    width:35%; height:100%;
+    background: linear-gradient(115deg, transparent, rgba(216,178,106,0.16), transparent);
+    transform: skewX(-20deg);
+    transition: left .65s ease;
+    pointer-events:none;
+  }
+  .company-card:hover{ border-color:var(--gold-dim); background:rgba(216,178,106,0.05); }
+  .company-card:hover::after{ left:135%; }
+  .company-card .co-head{
+    display:flex; align-items:center; justify-content:space-between;
+    margin-bottom:10px;
+  }
+  .company-card .co-name{
+    font-family:var(--serif);
+    font-size:16px;
+    color:var(--text);
+  }
+  .company-card .co-code{
+    font-size:11.5px;
+    color:var(--text-faint);
+    letter-spacing:0.03em;
+  }
+  .company-card p{ font-size:13px; color:var(--text-dim); line-height:1.7; margin-bottom:10px; }
+  @media(max-width:560px){ .company-grid{ grid-template-columns:1fr; } }
+
+  /* ---------- DATA CARDS ---------- */
+  .data-group{ margin-bottom:30px; }
+  .data-group h4{
+    font-family:var(--serif);
+    font-size:16px;
+    color:var(--gold-bright);
+    margin-bottom:12px;
+    padding-bottom:8px;
+    border-bottom:1px solid var(--line);
+  }
+  .data-item{
+    display:flex; justify-content:space-between; align-items:flex-start;
+    gap:14px;
+    padding:11px 0;
+    border-bottom:1px dashed var(--line);
+  }
+  .data-item:last-child{ border-bottom:none; }
+  .data-item .d-label{ font-size:13px; color:var(--text-dim); flex:1; }
+  .data-item .d-value{
+    font-family:var(--serif);
+    font-size:14px;
+    color:var(--text);
+    text-align:right;
+    flex:none;
+    max-width:42%;
+  }
+
+  /* ---------- CALLOUT ---------- */
+  .callout{
+    border-left:3px solid var(--gold);
+    background: rgba(216,178,106,0.05);
+    padding:20px 22px;
+    margin:30px 0 44px;
+    border-radius:0 4px 4px 0;
+  }
+  .callout h4{
+    font-family:var(--serif);
+    font-size:15px;
+    color:var(--gold-bright);
+    margin-bottom:10px;
+  }
+  .callout p{ font-size:13px; color:var(--text-dim); line-height:1.8; margin-bottom:8px; }
+  .callout p:last-child{ margin-bottom:0; }
+
+  /* ---------- CREDIBILITY LEGEND ---------- */
+  .legend-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr 1fr;
+    gap:14px;
+    margin:24px 0 44px;
+  }
+  .legend-item{
+    border:1px solid var(--line);
+    background:var(--card-solid);
+    border-radius:4px;
+    padding:20px 18px;
+  }
+  .legend-item .tag{ margin-bottom:12px; }
+  .legend-item p{ font-size:12.5px; color:var(--text-dim); line-height:1.7; }
+  .legend-item .eg{ margin-top:10px; font-size:11.5px; color:var(--text-faint); }
+  @media(max-width:700px){ .legend-grid{ grid-template-columns:1fr; } }
+
+  /* ---------- DOWNLOAD CTA ---------- */
+  .download-cta{
+    border:1px solid var(--gold-dim);
+    background: linear-gradient(135deg, rgba(216,178,106,0.06), transparent 60%), var(--card-solid);
+    border-radius:4px;
+    padding:30px 26px;
+    margin:20px 0 50px;
+    display:flex; align-items:center; justify-content:space-between;
+    gap:20px;
+    flex-wrap:wrap;
+  }
+  .download-cta .dl-text h4{
+    font-family:var(--serif);
+    font-size:16px;
+    color:var(--text);
+    margin-bottom:6px;
+  }
+  /* ---------- DOWNLOAD CTA ---------- */
+  .download-cta{
+    position:relative; overflow:hidden;
+    border:1px solid var(--gold);
+    background: linear-gradient(135deg, rgba(216,178,106,0.1), transparent 65%), var(--card-solid);
+    border-radius:6px;
+    padding:32px 30px;
+    margin:20px 0 50px;
+    display:flex; align-items:center; justify-content:space-between;
+    gap:24px;
+    flex-wrap:wrap;
+  }
+  .download-cta .dl-left{
+    display:flex; align-items:center; gap:16px;
+  }
+  .download-cta .dl-icon{
+    flex:none;
+    width:48px; height:48px;
+    border-radius:10px;
+    border:1px solid var(--gold-dim);
+    background: radial-gradient(circle at 30% 25%, rgba(216,178,106,0.2), transparent 70%);
+    display:flex; align-items:center; justify-content:center;
+    color:var(--gold-bright);
+  }
+  .download-cta .dl-icon svg{ width:24px; height:24px; }
+  .download-cta .dl-text h4{
+    font-family:var(--serif);
+    font-size:18px;
+    color:var(--text);
+    margin-bottom:6px;
+  }
+  .download-cta .dl-text p{ font-size:13.5px; color:var(--text-dim); }
+  .dl-btn{
+    position:relative; overflow:hidden;
+    flex:none;
+    display:inline-flex; align-items:stretch;
+    background: linear-gradient(160deg, #1d1812, #100e0b);
+    border:1px solid var(--gold);
+    border-radius:8px;
+    text-decoration:none;
+    box-shadow: 0 0 20px 2px rgba(240,208,137,0.22), 0 6px 16px rgba(0,0,0,0.4);
+    transition: transform .25s ease, box-shadow .25s ease;
+  }
+  .dl-btn:hover{ transform:translateY(-3px); box-shadow: 0 0 28px 4px rgba(240,208,137,0.4), 0 10px 20px rgba(0,0,0,0.45); }
+  .dl-seal{
+    flex:none;
+    width:52px;
+    display:flex; align-items:center; justify-content:center;
+    background: radial-gradient(circle at 32% 28%, var(--gold-bright), var(--gold) 60%, var(--gold-dim));
+    color:#171310;
+    border-radius:7px 0 0 7px;
+  }
+  .dl-seal svg{ width:22px; height:22px; }
+  .dl-btn-text{
+    display:flex; flex-direction:column; justify-content:center; gap:3px;
+    padding:11px 24px 11px 16px;
+    border-left:1px dashed rgba(216,178,106,0.45);
+  }
+  .dl-btn-text .tiny{ font-size:10px; letter-spacing:0.14em; color:var(--gold-dim); text-transform:uppercase; }
+  .dl-btn-text .main{ font-family:var(--serif); font-size:16px; font-weight:700; color:var(--text); }
+  .dl-btn::after{
+    content:"";
+    position:absolute; top:0; left:-60%;
+    width:30%; height:100%;
+    background: linear-gradient(115deg, transparent, rgba(240,208,137,0.35), transparent);
+    transform: skewX(-20deg);
+    animation: shimmer 2.8s ease-in-out infinite;
+    pointer-events:none;
+  }
+</style>
+<body>
+
+<section class="hero-split">
+  <div class="hero-photo-full">
+    <img src="https://ik.imagekit.io/wmb06guhs/JM.jpg" alt="散戶日記">
+    <div class="hero-fade"></div>
+  </div>
+  <div class="hero-panel">
+    <div class="eyebrow">散戶日記 · @REALNAME_448</div>
+    <div class="eyebrow-sub">PRIVATE NOTES · <span>產業供應鏈解析</span></div>
+    <h1 class="title">台積電，<br>有<span class="accent">威脅</span>了嗎？</h1>
+    <p class="subtitle">Intel 傳出先進封裝良率突破 90%、成本更低——但台積電的反擊「類 EMIB」也在路上。這份整理把技術差異、供應鏈陣營、法人預估數字一次看懂。</p>
+    <div class="hero-stats">
+      <div class="stat"><b>2</b><span>供應鏈陣營</span></div>
+      <div class="stat"><b>6</b><span>觀察標的</span></div>
+      <div class="stat"><b>23</b><span>篇資料來源</span></div>
+    </div>
+    <div class="scroll-cue">開始看整理<span class="arrow"></span></div>
+  </div>
+</section>
+
+<div class="wrap">
+
+  <!-- NOTICE -->
+  <div class="notice-card">
+    <div class="notice-icon">!</div>
+    <div>
+      <h4>發布前必讀 · 這是資訊整理，不是投資建議</h4>
+      <p>本頁彙整自公開媒體報導與券商研究，僅供資訊參考與教育討論，<strong style="color:var(--text)">不構成任何個股買賣之邀約或投資建議</strong>。文中多數數字來自媒體轉述之消息人士、法人預估，尚未經公司正式公告證實——請把「傳出」「據報導」當成真正的語氣看待，不要當成已發生的事實。投資一定有風險，請自行審慎判斷並自負盈虧。</p>
+    </div>
+  </div>
+
+  <!-- SECTION HEAD -->
+  <div class="section-head" style="padding-top:0;">
+    <h2>把晶片想成一座城市</h2>
+    <p>CoWoS 跟「類 EMIB」，是兩種完全不同的解法</p>
+  </div>
+
+  <!-- TECH DIAGRAM -->
+  <div class="tech-diagram">
+    <div class="diagram-col">
+      <svg viewBox="0 0 220 120" fill="none">
+        <rect x="14" y="52" width="192" height="16" rx="3" fill="rgba(216,178,106,0.5)" stroke="currentColor" stroke-width="1.2" style="color:var(--gold-dim)"/>
+        <circle cx="30" cy="60" r="4" fill="var(--bg)" stroke="var(--gold)" stroke-width="1.2"/>
+        <circle cx="60" cy="60" r="4" fill="var(--bg)" stroke="var(--gold)" stroke-width="1.2"/>
+        <circle cx="90" cy="60" r="4" fill="var(--bg)" stroke="var(--gold)" stroke-width="1.2"/>
+        <circle cx="130" cy="60" r="4" fill="var(--bg)" stroke="var(--gold)" stroke-width="1.2"/>
+        <circle cx="160" cy="60" r="4" fill="var(--bg)" stroke="var(--gold)" stroke-width="1.2"/>
+        <circle cx="190" cy="60" r="4" fill="var(--bg)" stroke="var(--gold)" stroke-width="1.2"/>
+      </svg>
+      <p><b>CoWoS</b><br>鋪一整片高速公路<br>速度快，但比較貴</p>
+    </div>
+    <div class="diagram-col">
+      <svg viewBox="0 0 220 120" fill="none" stroke="var(--gold)" stroke-width="1.4">
+        <line x1="14" y1="72" x2="60" y2="72" stroke-dasharray="2 3" opacity="0.35"/>
+        <path d="M60 72 Q78 48 96 72" fill="none"/>
+        <line x1="96" y1="72" x2="130" y2="72" stroke-dasharray="2 3" opacity="0.35"/>
+        <path d="M130 72 Q148 48 166 72" fill="none"/>
+        <line x1="166" y1="72" x2="206" y2="72" stroke-dasharray="2 3" opacity="0.35"/>
+        <circle cx="60" cy="72" r="3.5" fill="var(--gold)" stroke="none"/>
+        <circle cx="96" cy="72" r="3.5" fill="var(--gold)" stroke="none"/>
+        <circle cx="130" cy="72" r="3.5" fill="var(--gold)" stroke="none"/>
+        <circle cx="166" cy="72" r="3.5" fill="var(--gold)" stroke="none"/>
+      </svg>
+      <p><b>類 EMIB</b><br>只在重要的地方蓋橋<br>更省錢，也更有彈性</p>
+    </div>
+  </div>
+
+  <!-- SPEC TABLE -->
+  <table class="spec-table">
+    <tr><th>項目</th><th>CoWoS（台積電）</th><th>EMIB（英特爾）</th></tr>
+    <tr><td>目前光罩尺寸倍數</td><td>CoWoS-S 約 3.3 倍；CoWoS-L 約 3.5 倍</td><td>EMIB-M 已達 6 倍</td></tr>
+    <tr><td>2026–2027 年展望</td><td>CoWoS-L 預計 2027 年達 9 倍</td><td>EMIB-M 預計擴至 8 至 12 倍</td></tr>
+    <tr><td>載板技術路線</td><td>大面積矽中介層</td><td>有機載板＋局部嵌入矽橋</td></tr>
+    <tr><td>EMIB-T 良率<br><span class="tag rumor" style="margin-top:4px;">傳出</span></td><td>—</td><td>外媒報導已突破 9 成，預計 2027 年量產，成本約為 CoWoS 的一半</td></tr>
+    <tr><td>已知客戶<br><span class="tag rumor" style="margin-top:4px;">傳出</span></td><td>—</td><td>聯發科已下單；博通、Meta 正評估採用</td></tr>
+  </table>
+
+  <!-- SUPPLY CHAIN CAMPS -->
+  <div class="section-head" style="padding-top:10px;">
+    <h2>供應鏈兩大陣營</h2>
+    <p>證實程度不同，請分開看待</p>
+  </div>
+
+  <div class="camp-block">
+    <div class="camp-head">
+      <h4>台積電「類 EMIB」陣營</h4>
+      <span class="tag rumor">仍屬傳聞階段</span>
+    </div>
+    <div class="company-grid">
+      <div class="company-card">
+        <div class="co-head"><span class="co-name">景碩</span><span class="co-code">3189</span></div>
+        <p>美系外媒最早點名的合作載板廠，傳出協助台積電從研發階段推進到量產規模。景碩對相關報導表示「不予評論」，台積電未回應。</p>
+        <span class="tag rumor">傳聞</span>
+      </div>
+      <div class="company-card">
+        <div class="co-head"><span class="co-name">欣興</span><span class="co-code">3037</span></div>
+        <p>後續傳出被拉入合作，負責承載矽橋的 ABF 基板端。角色主要來自媒體轉述，非公司公告。</p>
+        <span class="tag rumor">傳聞</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="camp-block">
+    <div class="camp-head">
+      <h4>英特爾原生 EMIB 陣營</h4>
+      <span class="tag report">進度較具體</span>
+    </div>
+    <div class="company-grid">
+      <div class="company-card">
+        <div class="co-head"><span class="co-name">聯電</span><span class="co-code">2303</span></div>
+        <p>代工 EMIB 內嵌的矽橋（Silicon Bridge）本體，台灣及新加坡 12 吋廠已在生產，供英特爾及合作夥伴使用。</p>
+        <span class="tag report">產業報導</span>
+      </div>
+      <div class="company-card">
+        <div class="co-head"><span class="co-name">力積電</span><span class="co-code">6770</span></div>
+        <p>12 吋 IPD 平台供電力去耦與訊號整合，已完成國際大廠認證；2026 年 Q2 起放量，2027 下半年月投片目標近 1 萬片。</p>
+        <span class="tag report">產業報導</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout" style="border-left-color:#c99d8c; background:rgba(138,90,74,0.06);">
+    <h4>⚠ 代號提醒</h4>
+    <p>聯電代號是 <b style="color:var(--text)">2303</b>，台積電代號是 <b style="color:var(--text)">2330</b>——兩者常被混淆，看資料時請再次確認。</p>
+  </div>
+
+  <!-- KEY DATA -->
+  <div class="section-head" style="padding-top:10px;">
+    <h2>關鍵數字整理</h2>
+    <p>每個數字都標了可信度等級，自己判斷再決定要不要進一步查證</p>
+  </div>
+
+  <div class="data-group">
+    <h4>欣興（3037）</h4>
+    <div class="data-item"><span class="d-label">2026 年資本支出<span class="tag estimate" style="margin-left:6px;">法人預估</span></span><span class="d-value">上修 57%，達 537 億元</span></div>
+    <div class="data-item"><span class="d-label">長交期設備採購金額<span class="tag estimate" style="margin-left:6px;">法人預估</span></span><span class="d-value">上修至 316 億元</span></div>
+    <div class="data-item"><span class="d-label">AI ASIC 載板市占率<span class="tag estimate" style="margin-left:6px;">法人預估</span></span><span class="d-value">70%</span></div>
+    <div class="data-item"><span class="d-label">全球 ABF 市占率<span class="tag report" style="margin-left:6px;">產業報導</span></span><span class="d-value">約 27%（產業龍頭）</span></div>
+    <div class="data-item"><span class="d-label">Q2 實際 EPS<span class="tag confirmed" style="margin-left:6px;">已證實</span></span><span class="d-value">8.45 元，年增 42 倍</span></div>
+    <div class="data-item"><span class="d-label">法人 EPS 預估（26/27/28）<span class="tag estimate" style="margin-left:6px;">法人預估</span></span><span class="d-value">元大／凱基／富邦各有不同估值，區間約 16～54 元</span></div>
+  </div>
+
+  <div class="data-group">
+    <h4>景碩（3189）／南電（8046）</h4>
+    <div class="data-item"><span class="d-label">景碩股價動態<span class="tag confirmed" style="margin-left:6px;">已證實</span></span><span class="d-value">8/3 開盤即漲停，連 3 天拉漲停</span></div>
+    <div class="data-item"><span class="d-label">南電股價動態<span class="tag confirmed" style="margin-left:6px;">已證實</span></span><span class="d-value">8/3 重返千元，急拉至 1045 元漲停</span></div>
+    <div class="data-item"><span class="d-label">南電外資目標價<span class="tag estimate" style="margin-left:6px;">法人預估</span></span><span class="d-value">由 1115 元調升至 2310 元</span></div>
+  </div>
+
+  <div class="data-group">
+    <h4>力積電（6770）</h4>
+    <div class="data-item"><span class="d-label">12 吋 IPD 平台放量時間<span class="tag report" style="margin-left:6px;">產業報導</span></span><span class="d-value">2026 年 Q2 起</span></div>
+    <div class="data-item"><span class="d-label">2026 年 3 月合併營收<span class="tag confirmed" style="margin-left:6px;">已證實</span></span><span class="d-value">47.3 億元，月增 12.05%、年增 28.25%，創 41 個月新高</span></div>
+    <div class="data-item"><span class="d-label">本益比<span class="tag report" style="margin-left:6px;">產業報導</span></span><span class="d-value">約 11.5 倍</span></div>
+  </div>
+
+  <div class="data-group">
+    <h4>Google／輝達／英特爾傳聞訂單</h4>
+    <div class="data-item"><span class="d-label">Google 委託英特爾生產 TPU<span class="tag rumor" style="margin-left:6px;">傳聞</span></span><span class="d-value">逾 300 萬顆，2028 年前完成</span></div>
+    <div class="data-item"><span class="d-label">輝達導入評估<span class="tag rumor" style="margin-left:6px;">傳聞</span></span><span class="d-value">評估用於四顆 GPU 裸片同封裝的下一代處理器</span></div>
+    <div class="data-item"><span class="d-label">輝達入股英特爾<span class="tag confirmed" style="margin-left:6px;">已證實</span></span><span class="d-value">50 億美元，2025 年 9 月</span></div>
+  </div>
+
+  <!-- CALLOUT: 2028 nuance -->
+  <div class="callout">
+    <h4>解讀提醒：「2028 年」是怎麼來的？</h4>
+    <p>目前唯一有具體數字支撐「2028 年」這個時間點的，就是 Google／輝達委託英特爾的傳聞——而這整段本身仍是「傳」字輩消息，Google、輝達、英特爾三方均未正式證實。</p>
+    <p>台廠（景碩、欣興、聯電、力積電）目前均未自行公開「訂單能見度到 2028 年」的說法，較明確的是力積電公布到 2027 年下半年的投片規劃。</p>
+  </div>
+
+  <!-- CREDIBILITY LEGEND -->
+  <div class="section-head" style="padding-top:10px;">
+    <h2>消息可信度：三個等級</h2>
+    <p>看新聞時，先分清楚這是哪一種</p>
+  </div>
+  <div class="legend-grid">
+    <div class="legend-item">
+      <span class="tag confirmed">已證實</span>
+      <p>公司財報、月營收公告、官方認證、已完成之交易。</p>
+      <div class="eg">例：力積電月營收、輝達入股英特爾 50 億美元</div>
+    </div>
+    <div class="legend-item">
+      <span class="tag estimate">法人預估</span>
+      <p>券商／分析師依模型推算之 EPS、目標價，非公司自行公布之財測。</p>
+      <div class="eg">例：欣興各家券商 EPS 預估、南電目標價</div>
+    </div>
+    <div class="legend-item">
+      <span class="tag rumor">傳聞</span>
+      <p>媒體引述「消息人士」、「據傳」，公司回應「不予評論」或未回應。</p>
+      <div class="eg">例：台積電與景碩／欣興合作傳聞</div>
+    </div>
+  </div>
+
+  <!-- DOWNLOAD CTA -->
+  <div class="download-cta">
+    <div class="dl-left">
+      <div class="dl-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="M7 11l5 5 5-5"/><path d="M4 18v2a1 1 0 001 1h14a1 1 0 001-1v-2"/></svg></div>
+      <div class="dl-text">
+        <h4>資訊量比較大，想收藏文字版？</h4>
+        <p>完整版彙編（含全部 23 篇資料來源連結）— PDF／文字檔下載</p>
+      </div>
+    </div>
+    <a class="dl-btn" href="https://drive.google.com/file/d/1Xm2YNS5uwhXSkAzkWn2Z3rc0FQqLYhvb/view?usp=drivesdk" target="_blank" rel="noopener">
+      <span class="dl-seal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4.5" y="10.5" width="15" height="9.5" rx="1.5"/><path d="M8 10.5V7a4 4 0 018 0v3.5"/></svg></span>
+      <span class="dl-btn-text"><span class="tiny">免費下載</span><span class="main">解鎖完整彙編 →</span></span>
+    </a>
+  </div>
+
+  <!-- FORUM ENTRY -->
+  <section class="live-section">
+    <div class="live-label">論壇入口</div>
+    <h3>點擊黃色按鈕前往</h3>
+    <div class="hint">更多產業動態與供應鏈觀察，論壇現場更新</div>
+    <div class="live-btn-wrap">
+      <a class="live-btn" href="https://course.rich5428.com/828448.html" target="_blank" rel="noopener">
+        <span class="dot"></span> <span>論壇限量抽籤/報名</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="socials">
+      <a href="https://www.instagram.com/realname_448" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17" cy="7" r="1" fill="currentColor" stroke="none"/></svg>
+        Instagram @realname_448 →
+      </a>
+      <a href="https://www.tiktok.com/@iwantmoney16888?is_from_webapp=1&sender_device=pc" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M14 4v9.5a3.5 3.5 0 11-3-3.46"/><path d="M14 4c0 2.5 2 4.5 4.5 4.5"/></svg>
+        TikTok @iwantmoney16888 →
+      </a>
+    </div>
+    <p class="disclaimer">本頁內容彙整自公開媒體報導與券商研究，僅供資訊參考與教育討論用途，不構成任何個股買賣之邀約、招攬或投資建議。文中數字多數來自媒體轉述之消息人士或法人預估，尚未經公司正式公告證實，請勿將傳聞視為已發生事實。投資有風險，請自行審慎判斷並自負盈虧，資料彙整日期：2026 年 8 月 8 日。</p>
+    <p class="brandline">散戶日記 · @iwantmoney16888 · 富豐深耕金融教育 16 年</p>
+  </footer>
+
+</div>
+
+</body>
+</html>
