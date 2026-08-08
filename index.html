@@ -669,23 +669,34 @@
   /* ---------- PAGE-SPECIFIC: NOTICE / DISCLAIMER BANNER ---------- */
   .notice-card{
     position:relative; z-index:1;
-    border:1px solid rgba(138,90,74,0.5);
-    background: linear-gradient(135deg, rgba(138,90,74,0.09), transparent 60%), var(--card-solid);
-    border-radius:4px;
-    padding:24px 26px;
+    border:1.5px solid rgba(201,157,140,0.75);
+    background: linear-gradient(135deg, rgba(138,90,74,0.14), transparent 65%), var(--card-solid);
+    border-radius:5px;
+    padding:26px 28px;
     margin-bottom:44px;
     display:flex; gap:16px;
+    animation: noticePulse 2.6s ease-in-out infinite;
+  }
+  @keyframes noticePulse{
+    0%,100%{ box-shadow: 0 0 0 0 rgba(201,157,140,0.15); border-color: rgba(138,90,74,0.55); }
+    50%{ box-shadow: 0 0 26px 5px rgba(201,157,140,0.4); border-color: rgba(201,157,140,0.95); }
   }
   .notice-card .notice-icon{
     flex:none;
-    width:34px; height:34px;
+    width:36px; height:36px;
     border-radius:50%;
-    border:1px solid rgba(201,157,140,0.6);
+    border:1.5px solid rgba(201,157,140,0.8);
     display:flex; align-items:center; justify-content:center;
-    color:#c99d8c;
+    color:#e8d9d2;
+    background: rgba(201,157,140,0.12);
     font-family:var(--serif);
     font-weight:700;
-    font-size:16px;
+    font-size:17px;
+    animation: noticeIconPulse 2.6s ease-in-out infinite;
+  }
+  @keyframes noticeIconPulse{
+    0%,100%{ box-shadow: 0 0 0 0 rgba(201,157,140,0.3); }
+    50%{ box-shadow: 0 0 12px 3px rgba(201,157,140,0.7); }
   }
   .notice-card h4{
     font-family:var(--serif);
@@ -1014,7 +1025,7 @@
     <div class="hero-stats">
       <div class="stat"><b>2</b><span>供應鏈陣營</span></div>
       <div class="stat"><b>6</b><span>觀察標的</span></div>
-      <div class="stat"><b>23</b><span>篇資料來源</span></div>
+      <div class="stat"><b>27</b><span>篇資料來源</span></div>
     </div>
     <div class="scroll-cue">開始看整理<span class="arrow"></span></div>
   </div>
@@ -1073,7 +1084,7 @@
     <tr><td>目前光罩尺寸倍數</td><td>CoWoS-S 約 3.3 倍；CoWoS-L 約 3.5 倍</td><td>EMIB-M 已達 6 倍</td></tr>
     <tr><td>2026–2027 年展望</td><td>CoWoS-L 預計 2027 年達 9 倍</td><td>EMIB-M 預計擴至 8 至 12 倍</td></tr>
     <tr><td>載板技術路線</td><td>大面積矽中介層</td><td>有機載板＋局部嵌入矽橋</td></tr>
-    <tr><td>EMIB-T 良率<br><span class="tag rumor" style="margin-top:4px;">傳出</span></td><td>—</td><td>外媒報導已突破 9 成，預計 2027 年量產，成本約為 CoWoS 的一半</td></tr>
+    <tr><td>英特爾自身封裝製程良率<br><span class="tag rumor" style="margin-top:4px;">傳出</span></td><td>—</td><td>外媒報導稱英特爾自身封裝製程良率已突破 9 成，預計 2027 年量產，成本約為 CoWoS 的一半</td></tr>
     <tr><td>已知客戶<br><span class="tag rumor" style="margin-top:4px;">傳出</span></td><td>—</td><td>聯發科已下單；博通、Meta 正評估採用</td></tr>
   </table>
 
@@ -1134,12 +1145,19 @@
 
   <div class="data-group">
     <h4>欣興（3037）</h4>
-    <div class="data-item"><span class="d-label">2026 年資本支出<span class="tag estimate" style="margin-left:6px;">法人預估</span></span><span class="d-value">上修 57%，達 537 億元</span></div>
-    <div class="data-item"><span class="d-label">長交期設備採購金額<span class="tag estimate" style="margin-left:6px;">法人預估</span></span><span class="d-value">上修至 316 億元</span></div>
-    <div class="data-item"><span class="d-label">AI ASIC 載板市占率<span class="tag estimate" style="margin-left:6px;">法人預估</span></span><span class="d-value">70%</span></div>
+    <div class="data-item"><span class="d-label">2026 年資本支出<span class="tag estimate" style="margin-left:6px;">法人預估</span></span><span class="d-value">由 340 億元上修至 537 億元，80–85% 投入 ABF 載板</span></div>
+    <div class="data-item"><span class="d-label">長交期設備採購金額<span class="tag estimate" style="margin-left:6px;">法人預估</span></span><span class="d-value">由 141 億元上修至 316 億元</span></div>
+    <div class="data-item"><span class="d-label">AI ASIC 載板市占率<span class="tag estimate" style="margin-left:6px;">法人預估</span></span><span class="d-value">美系市占逾 70%</span></div>
+    <div class="data-item"><span class="d-label">中長期毛利率展望<span class="tag estimate" style="margin-left:6px;">法人預估</span></span><span class="d-value">50%–60%（ABF 目標毛利率）</span></div>
     <div class="data-item"><span class="d-label">全球 ABF 市占率<span class="tag report" style="margin-left:6px;">產業報導</span></span><span class="d-value">約 27%（產業龍頭）</span></div>
     <div class="data-item"><span class="d-label">Q2 實際 EPS<span class="tag confirmed" style="margin-left:6px;">已證實</span></span><span class="d-value">8.45 元，年增 42 倍</span></div>
-    <div class="data-item"><span class="d-label">法人 EPS 預估（26/27/28）<span class="tag estimate" style="margin-left:6px;">法人預估</span></span><span class="d-value">元大／凱基／富邦各有不同估值，區間約 16～54 元</span></div>
+    <div class="data-item"><span class="d-label">自家 EMIB-T 基板良率目標<span class="tag confirmed" style="margin-left:6px;">已證實</span></span><span class="d-value">公司目標挑戰 50% 首階良率，2027 年量產</span></div>
+    <div class="data-item"><span class="d-label">法人 EPS／目標價預估（26/27/28）<span class="tag estimate" style="margin-left:6px;">法人預估</span></span><span class="d-value">元大／凱基／富邦估值不同，EPS 約 16～54 元，目標價約 1010～1175 元</span></div>
+  </div>
+
+  <div class="callout" style="margin-top:-16px;">
+    <h4>別搞混：兩個「EMIB-T」不是同一件事</h4>
+    <p>上面欣興的「EMIB-T 基板良率目標」，是<b style="color:var(--text)">台積電／欣興這邊</b>的類 EMIB 量產計畫，公司法說會公開目標是挑戰 50% 首階良率；下方技術規格表裡「英特爾自身封裝製程良率已突破 9 成」，講的是<b style="color:var(--text)">英特爾自己</b>的製程，兩間公司、兩套數字，不能直接拿來比較。</p>
   </div>
 
   <div class="data-group">
@@ -1199,10 +1217,10 @@
       <div class="dl-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="M7 11l5 5 5-5"/><path d="M4 18v2a1 1 0 001 1h14a1 1 0 001-1v-2"/></svg></div>
       <div class="dl-text">
         <h4>資訊量比較大，想收藏文字版？</h4>
-        <p>完整版彙編（含全部 23 篇資料來源連結）— PDF／文字檔下載</p>
+        <p>完整版彙編（含全部 27 篇資料來源連結）— PDF／文字檔下載</p>
       </div>
     </div>
-    <a class="dl-btn" href="https://drive.google.com/file/d/1Xm2YNS5uwhXSkAzkWn2Z3rc0FQqLYhvb/view?usp=drivesdk" target="_blank" rel="noopener">
+    <a class="dl-btn" href="https://drive.google.com/file/d/1hfbICb8Bgkt5CyKOt2jl9Ea3lpvZIA76/view?usp=drivesdk" target="_blank" rel="noopener">
       <span class="dl-seal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4.5" y="10.5" width="15" height="9.5" rx="1.5"/><path d="M8 10.5V7a4 4 0 018 0v3.5"/></svg></span>
       <span class="dl-btn-text"><span class="tiny">免費下載</span><span class="main">解鎖完整彙編 →</span></span>
     </a>
